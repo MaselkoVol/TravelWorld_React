@@ -1,0 +1,152 @@
+@import "../../utils/styles/common.scss";
+
+.footer {
+  &__logo > img {
+    width: 95%;
+    height: 95%;
+  }
+  &__text {
+    color: $greyColor;
+    font-size: 16;
+    font-weight: 400;
+  }
+  &__icons {
+    display: flex;
+    gap: em(25);
+    & .footer__media-icon {
+      font-size: toRem(35);
+    }
+  }
+
+  &__rights {
+    margin-top: toRem(15);
+    font-size: toRem(16);
+    font-weight: 400;
+    color: $greyColor;
+    &_color {
+      color: $lightOrangeColor;
+      font-weight: 500;
+    }
+  }
+
+	&__contacts-list-item {
+		display: flex;
+		column-gap: em(10);
+		font-size: toRem(20);
+		font-weight: 500;
+		white-space: nowrap;
+		flex-wrap: wrap;
+		& i {
+			font-size: toRem(18);
+			color: $lightOrangeColor;
+		}
+		& span {
+			color: $greyColor;
+		}
+	}
+
+	&__link {
+		font-size: toRem(20);
+		font-weight: 500;
+		color: $greyColor;
+		@include linkHover1($lightOrangeColor);
+	}
+
+}
+
+
+@media (max-width: $mobile) {
+  .footer {
+		&__logo {
+		}
+		&__text {
+			margin-top: em(10);
+			max-width: toRem(400);
+		}
+		&__icons {
+			margin-top: em(15);
+		}
+
+		&__accordeon {
+			margin-top: toRem(10);
+		}
+
+		&__accordeon-content > li {
+      margin-top: toRem(10);
+			&:last-of-type {
+        margin-bottom: toRem(10);
+      }
+    }
+  }
+}
+
+
+@media (min-width: $mobile) and (max-width: toRem(960)) {
+  .footer {
+		&__lists {
+			display: flex;
+      gap: em(20);
+      justify-content: space-between;
+		}
+    &__item {
+      &_main {
+        display: grid;
+				grid-template-columns: 1fr 1fr;
+      }
+    }
+		&__text {
+			margin-top: toRem(20);
+			text-align: right;
+		}
+		&__icons {
+			grid-column: 2;
+			width: fit-content;
+			margin-left: auto;
+		}
+		&__accordeon-content > li {
+      margin-top: toRem(25);
+      &:first-of-type {
+        margin-top: toRem(30);
+      }
+    }
+
+		&__accordeon {
+			margin-top: em(20);
+		}
+  }
+}
+
+@media (min-width: toRem(960)) {
+  .footer {
+    &__container {
+      padding: toRem(30) 0 toRem(20) 0;
+    }
+    &__lists {
+      display: flex;
+      gap: em(50);
+      justify-content: space-between;
+    }
+    &__item {
+      &_main {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+    }
+		&__text {
+			max-width: toRem(255);
+		}
+
+    &__accordeon {
+      margin-top: toRem(20);
+    }
+
+    &__accordeon-content > li {
+      margin-top: toRem(25);
+      &:first-of-type {
+        margin-top: toRem(30);
+      }
+    }
+
+  }
+}

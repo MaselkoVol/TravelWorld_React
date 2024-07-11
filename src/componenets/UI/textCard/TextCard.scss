@@ -1,0 +1,58 @@
+@import "../../../utils/styles/common.scss";
+
+.text-card {
+	padding: em(20) em(69 ) em(30) em(20);
+  background-color: $darkWhiteColor;
+  color: $darkGreenColor;
+	border-radius: em(16);
+	border-right: 1px solid $lightOrangeColor;
+	border-bottom: 1px solid $lightOrangeColor;
+	height: fit-content;
+  &__icon {
+		flex: 0 0 auto;
+		font-size: toRem(28);
+    width: em(28.57);
+    height:  em(28.57);
+    border-radius: 100%;
+    background-color: $lightOrangeColor;
+		margin-bottom: toRem(25);
+		&.no-icon {
+			display: none;
+		}
+		
+  }
+	&__icon-content {
+		font-family: "Island Moments";
+		color: $darkWhiteColor;
+		position: relative;
+		top: .35em;
+		left: .4em;
+	}
+	&__title {
+		font-size: em(18);
+		font-weight: 500;
+		margin-bottom: toRem(5);
+		white-space: nowrap;
+	}
+	&__text {
+		font-size: em(12 );
+		color: $greyColor;
+		max-width: toRem(173);
+	}
+	
+}
+
+
+@media (max-width: $mobile) {
+	.text-card {
+		width: 100%;
+		display: flex;
+		gap: em(25);
+		padding: em(20) em(69 ) em(30) em(20);
+		padding-bottom: em(15);
+		&__title {
+			white-space: wrap;
+		}
+	}
+
+}

@@ -1,0 +1,87 @@
+@import "../../../utils/styles/common.scss";
+
+.fake-searchbar {
+  &__container {
+    display: flex;
+    border-radius: em(40);
+    align-items: center;
+    padding: em(20) 0;
+    background-color: white;
+    box-shadow: 0 0 em(10) 0 $lightGreyColor;
+    width: fit-content;
+  }
+  &__icon {
+    color: $lightRedColor;
+    font-size: em(22);
+		width: toRem(22);
+		height: toRem(22);
+  }
+  &__title {
+    font-size: em(16);
+    font-weight: 500;
+  }
+  &__text {
+    color: $greyColor;
+    font-size: em(14);
+    font-weight: 500;
+  }
+  &__item-container {
+    display: flex;
+    align-items: center;
+    padding: 0 em(40);
+    gap: em(10);
+    flex-wrap: nowrap;
+    &_mid {
+      border-left: 2px solid $lightGreyColor;
+      border-right: 2px solid $lightGreyColor;
+    }
+  }
+
+  &__search {
+    width: em(48);
+    height: em(48);
+    border-radius: 10px 5px 10px 5px;
+    background-color: $lightOrangeColor;
+    position: relative;
+    margin-right: em(26);
+		cursor: pointer;
+  }
+  &__search-icon {
+    position: absolute;
+    font-size: em(28);
+    color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -40%) rotate(-15deg);
+  }
+}
+
+@media (max-width: em(820)) {
+  .fake-searchbar {
+    &__item-container {
+      &_last {
+        display: none;
+      }
+      &_mid {
+        border-right: none;
+      }
+    }
+  }
+}
+
+@media (max-width: em(600)) {
+  .fake-searchbar {
+		&__container {
+			padding: em(15) 0;
+		}
+    &__item-container {
+			padding: 0 em(10);
+      &_mid {
+        display: none;
+      }
+    }
+		&__search {
+			margin-right: em(20);
+		}
+  }
+}

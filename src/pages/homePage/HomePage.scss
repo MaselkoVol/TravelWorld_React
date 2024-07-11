@@ -1,0 +1,29 @@
+@import "../../utils/styles/common.scss";
+
+@media (min-width: $mobile) {
+  .home-page {
+    &__service {
+      padding: em(62) 0;
+    }
+		&__featured-tours {
+			padding: em(50) 0;
+		}
+		&__experience {
+			padding: em(50) 0;
+		}
+  }
+}
+
+@media (max-width: $mobile) {
+  .home-page {
+    &__service {
+      padding: em(30) 0;
+    }
+		&__featured-tours {
+			padding: em(30) 0;
+		}
+		&__experience {
+			padding: em(30) 0;
+		}
+  }
+}

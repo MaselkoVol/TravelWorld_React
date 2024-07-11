@@ -1,0 +1,217 @@
+@import "../../utils/styles/common.scss";
+
+.header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: $darkWhiteColor;
+  z-index: 100;
+}
+
+.header__icon {
+  cursor: pointer;
+  display: none;
+  width: 2.5em;
+  height: 2.5em;
+  position: relative;
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+
+  &::after,
+  &::before,
+  & > span {
+    position: absolute;
+    width: 100%;
+    height: 20%;
+    left: 0;
+    background-color: $darkGreenColor;
+    border-radius: 0.5em;
+    transition: transform 0.3s ease;
+  }
+  &::after {
+    content: "";
+    top: 0;
+  }
+  &::before {
+    content: "";
+    top: 80%;
+  }
+  & > span {
+    top: 40%;
+  }
+}
+
+.header {
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: toRem(85);
+  }
+
+  &__list_pages .header__link {
+    @include linkHover1($lightOrangeColor);
+    &.isActive {
+      color: $lightOrangeColor;
+    }
+  }
+  &__logo {
+    opacity: 0;
+    transition: opacity 1s ease;
+    &._animated-once {
+      opacity: 1;
+    }
+  }
+}
+
+.header__container._active {
+  & .header {
+    &__icon {
+      cursor: auto;
+      & > span {
+        transform: scale(0);
+      }
+      &::after {
+        transform: translateY(150%);
+      }
+      &::before {
+        transform: translateY(-150%);
+      }
+      opacity: 0;
+    }
+    &__menu {
+      left: 0;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: all;
+    }
+    &__close-area {
+      opacity: 0.7;
+      visibility: visible;
+      pointer-events: all;
+    }
+  }
+}
+
+@media (max-width: $mobile) {
+  .header {
+    & .header__logo {
+      width: toRem(220);
+      height: toRem(65.56);
+    }
+    &__close-area {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: $lightGreyColor;
+      z-index: 50;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: visibility 0.3s ease, opacity 0.3s ease;
+    }
+    &__menu {
+      overflow: auto;
+      position: fixed;
+      top: 0;
+      left: -80%;
+      width: 80%;
+      height: 100%;
+      background-color: $darkWhiteColor;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      z-index: 100;
+      transition: visibility 0.3s ease, opacity 0.3s ease, left 0.3s ease;
+      padding: toRem(15);
+    }
+    &__list {
+      font-size: 2.5rem;
+      line-height: 1.2;
+      &_authorization {
+        font-weight: 600;
+        margin-top: 1rem;
+
+        &.all .header__link {
+          @include styleLink3($lightOrangeColor);
+        }
+        &.register .header__link {
+          @include styleLink3($darkOrangeColor);
+        }
+        &.login .header__link {
+          @include styleLink3($darkGreenColor);
+        }
+        &.all > li:last-of-type .header__link {
+          @include activeLink3($lightOrangeColor);
+        }
+      }
+      &_authorization.register .header__link.isActive {
+        @include activeLink3($darkOrangeColor);
+      }
+      &_authorization.login .header__link.isActive {
+        @include activeLink3($darkGreenColor);
+      }
+    }
+    &__link {
+      font-size: 2rem;
+    }
+    &__icon {
+      display: block;
+      z-index: 100;
+    }
+  }
+}
+
+@media (min-width: $mobile) {
+  .header {
+    &__list {
+      display: flex;
+    }
+    &__menu {
+      display: flex;
+      align-items: center;
+    }
+    &__close-area {
+      display: none;
+    }
+
+    &__list {
+      font-size: toRem(18);
+      font-weight: 600;
+
+      &_pages {
+        gap: toRem(30);
+        margin-right: toRem(38);
+      }
+
+      &_authorization {
+        &.all {
+          & .header__link {
+            @include styleLink2;
+          }
+          & > li:last-of-type .header__link {
+            @include activeLink2($lightOrangeColor);
+            @include hoverLink2($lightOrangeColor);
+          }
+        }
+
+        &.register .header__link {
+          @include styleLink2;
+          &.isActive {
+            @include activeLink2($darkOrangeColor);
+          }
+        }
+        &.login .header__link {
+          @include styleLink2;
+          &.isActive {
+            @include activeLink2($darkGreenColor);
+          }
+        }
+      }
+    }
+  }
+}

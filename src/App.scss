@@ -1,0 +1,41 @@
+@import "./utils/styles/common.scss";
+
+
+.wrapper {
+	min-width: toRem($minWidth);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  @supports (overflow: clip) {
+    overflow: clip;
+  }
+
+  & > main {
+    flex: 1 1 auto;
+  }
+}
+
+
+.container {
+	max-width: toRem($containerWidth);
+	padding: 0 15px;
+	margin: 0 auto;
+}
+
+._colored-orange {
+	color: $lightOrangeColor;
+}
+
+._filled-text-orange {
+	white-space: nowrap;
+	font-size: toRem(27);
+	width: fit-content;
+	font-weight: 400;
+	padding: toRem(2) toRem(8);
+	background-color: $lightOrangeColor;
+	color: $darkGreenColor;
+	border-radius: toRem(100);
+	font-family: "Island Moments";
+}
+

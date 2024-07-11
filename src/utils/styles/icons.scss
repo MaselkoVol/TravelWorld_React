@@ -1,0 +1,98 @@
+@font-face {
+  font-family: 'travelWorld';
+  src:  url("../fonts/travelWorld.ttf");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"]::before, [class*=" icon-"]::before {
+	content: "";
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'travelWorld' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-mail:before {
+  content: "\e905";
+}
+.icon-phone:before {
+  content: "\e90a";
+}
+.icon-avatar:before {
+  content: "\e90b";
+}
+.icon-distance:before {
+  content: "\e903";
+}
+.icon-search:before {
+  content: "\e904";
+}
+.icon-location:before {
+  content: "\e90c";
+}
+.icon-customization:before {
+  content: "\e900";
+}
+.icon-guide:before {
+  content: "\e901";
+}
+.icon-weather:before {
+  content: "\e902";
+}
+.icon-instagram:before {
+  content: "\e906";
+  color: #faa935;
+}
+.icon-facebook:before {
+  content: "\e907";
+  color: #faa935;
+}
+.icon-twitter:before {
+  content: "\e908";
+  color: #faa935;
+}
+.icon-youtube:before {
+  content: "\e909";
+  color: #faa935;
+}
+.icon-apple_color:before {
+  content: "\e90d";
+}
+.icon-facebook_color .path1:before {
+  content: "\e90e";
+  color: rgb(0, 158, 226);
+}
+.icon-facebook_color .path2:before {
+  content: "\e90f";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-google_color .path1:before {
+  content: "\e910";
+  color: rgb(0, 158, 226);
+}
+.icon-google_color .path2:before {
+  content: "\e911";
+  margin-left: -1em;
+  color: rgb(52, 168, 83);
+}
+.icon-google_color .path3:before {
+  content: "\e912";
+  margin-left: -1em;
+  color: rgb(251, 188, 4);
+}
+.icon-google_color .path4:before {
+  content: "\e913";
+  margin-left: -1em;
+  color: rgb(234, 67, 53);
+}

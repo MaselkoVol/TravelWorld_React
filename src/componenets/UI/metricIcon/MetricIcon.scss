@@ -1,0 +1,35 @@
+@import "../../../utils/styles/common.scss";
+
+.metric-icon {
+	font-size: 1em;
+	display: flex;
+	flex-direction: column;
+	gap: 0.625em;
+	flex-wrap: nowrap;
+	align-items: center;
+	width: max-content;
+	&__header {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 4.375em;
+		height: 4.375em;
+		border-radius: 10px 5px 10px 5px;
+    background-color: $lightOrangeColor;
+	}
+
+	&__title {
+		font-size: 1.25em;
+		font-weight: 600;
+		color: $darkWhiteColor;
+		white-space: nowrap;
+	}
+
+	&__text {
+		text-align: center;
+		color: $greyColor;
+		font-size: 0.8125em;
+		max-width: 12.5em;
+		font-weight: 500;
+	}
+}

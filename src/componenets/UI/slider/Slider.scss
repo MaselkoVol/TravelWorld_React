@@ -1,0 +1,7 @@
+.super-duper-slider {
+	position: relative;
+	&__container {
+		display: flex;
+		overflow: hidden;
+	}
+}

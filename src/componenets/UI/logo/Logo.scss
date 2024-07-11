@@ -1,0 +1,17 @@
+@import "../../../utils/styles/common.scss";
+
+.website-logo {
+  display: block;
+  width: toRem(255);
+  height: toRem(76);
+  position: relative;
+  & > img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: contain;
+  }
+}

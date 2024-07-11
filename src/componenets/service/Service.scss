@@ -1,0 +1,52 @@
+@import "../../utils/styles/common.scss";
+
+.service-section {
+  display: flex;
+  gap: em(23);
+}
+.service-section {
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: em(10);
+  }
+  &__sub-title {
+    font-family: "Island Moments";
+    font-size: toRem(32);
+    font-weight: 400;
+    color: $lightRedColor;
+  }
+  &__title {
+    font-size: em(32);
+    font-weight: 500;
+  }
+  &__content {
+    display: flex;
+    gap: em(15);
+  }
+
+  &__text-card {
+    opacity: 0;
+    transform: translateY(100%);
+		transition: opacity .4s ease, transform .4s ease;
+		transition-delay: .1s;
+  }
+  &__content._animated-once .service-section__text-card {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 1050px) {
+  .service-section {
+    flex-wrap: wrap;
+    gap: em(15);
+    &__header {
+      gap: 0;
+    }
+
+    &__content {
+      flex-wrap: wrap;
+    }
+  }
+}

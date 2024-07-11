@@ -1,0 +1,99 @@
+@import "../../utils/styles/common.scss";
+
+.experience-section {
+  position: relative;
+  &__sub-title {
+  }
+
+  &__title {
+    margin-top: em(10);
+    font-size: em(32);
+    font-weight: 500;
+    max-width: toRem(377);
+  }
+
+  &__text {
+    color: $greyColor;
+    margin-top: em(10);
+    max-width: toRem(571);
+    font-weight: 500;
+    font-size: em(20);
+  }
+	&__metric {
+		opacity: 0;
+		transform: translateX(-100%);
+		transition: transform .4s ease, opacity .4s ease;
+		&_1 {
+			transition-delay: .1s;
+		}
+		&_2 {
+			transition-delay: .2s;
+		}
+		&_3 {
+			transition-delay: .3s;
+		}
+	}
+	&__metrics._animated-once {
+		.experience-section__metric {
+			transform: translateX(0);
+			opacity: 1;
+		}
+	}
+}
+
+@media (min-width: $mobileSmall) {
+  .experience-section {
+    &__image {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+      z-index: -1;
+      width: em(491);
+    }
+    &__metrics {
+      margin-top: em(30);
+      margin-bottom: em(107);
+      display: flex;
+      align-items: center;
+      gap: em(50);
+    }
+  }
+}
+
+@media (max-width: 1050px) {
+  .experience-section {
+    &__image {
+      opacity: 0.2;
+    }
+    &__text {
+      font-weight: 600;
+    }
+		&__metrics {
+			margin-bottom: em(50);
+		}
+  }
+}
+
+@media (max-width: $mobileSmall) {
+  .experience-section {
+    &__image {
+      display: none;
+    }
+    &__title {
+      font-size: em(24);
+    }
+    &__text {
+      font-size: em(16);
+      font-weight: 400;
+    }
+    &__metrics {
+      margin-top: em(20);
+      margin-bottom: em(20);
+      font-size: 0.8em;
+      display: flex;
+      align-items: center;
+			@include adaptiveValue(gap, 50, 10, 0, $mobileWidth, $minWidth);
+    }
+  }
+}

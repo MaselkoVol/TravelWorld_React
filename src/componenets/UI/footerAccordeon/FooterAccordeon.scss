@@ -1,0 +1,53 @@
+@import "../../../utils/styles/common.scss";
+
+.footer-accordeon {
+  &__title {
+    white-space: nowrap;
+  }
+}
+
+@media (min-width: $mobile) {
+  .footer-accordeon {
+    &__title {
+      font-weight: 500;
+    }
+  }
+}
+
+@media (max-width: $mobile) {
+  .footer-accordeon {
+		&__title {
+			cursor: pointer;
+			user-select: none;
+			position: relative;
+			width: fit-content;
+			&::after {
+				content: "";
+				position: absolute;
+				top: 0.3em;
+				left: calc(100% + 0.35em);
+				transform: rotate(0);
+				width: 0;
+				height: 0;
+				border-top: .7em solid $darkGreenColor;
+				border-left: .4em solid transparent;
+				border-right: .4em solid transparent;
+				transition: transform .3s ease;
+			}
+			&._active::after {
+				transform: rotate(180deg);
+			}
+		}
+    &__body {
+			display: grid;
+			grid-template-rows: 0fr;
+			transition: grid-template-rows .3s ease;
+			&._active {
+				grid-template-rows: 1fr;
+			}
+    }
+		&__content {
+			overflow: hidden;
+		}
+  }
+}

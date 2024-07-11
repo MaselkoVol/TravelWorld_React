@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import './App.scss';
+import { Outlet, useLocation, useNavigation, useOutletContext } from 'react-router';
+import "./utils/styles/icons.scss";
+import Header from './componenets/header/Header';
+import Footer from './componenets/footer/Footer';
+
+import { HeaderType } from './utils/types';
+import { addBodyClassIfMobile } from './utils/functions';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [headerType, setHeaderType] = useState<HeaderType>("all");
+
+	useEffect(()=> {
+		addBodyClassIfMobile();
+	}, [])
+
+	return (
+		<div className="App">
+			<div className='wrapper'>
+				<Header type={headerType} />
+				<main>
+					<Outlet context={setHeaderType}/>
+				</main>
+				<Footer />
+			</div>
+		</div>
+	);
+}
+
+export function useHeaderType () {
+	return useOutletContext<React.Dispatch<React.SetStateAction<HeaderType>>>();
 }
 
 export default App;

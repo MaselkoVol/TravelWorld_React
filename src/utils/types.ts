@@ -1,0 +1,1 @@
+export type HeaderType = "all" | "register" | "login";
