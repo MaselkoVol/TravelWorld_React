@@ -1,7 +1,18 @@
 .super-duper-slider {
-	position: relative;
-	&__container {
-		display: flex;
-		overflow: hidden;
+  &__container {
+    display: flex;
+    overflow: hidden;
+    white-space: nowrap;
+    scroll-behavior: smooth;
+		position: relative;
+		flex-wrap: nowrap;
+
+    &.dragging {
+      cursor: grab;
+      scroll-behavior: auto;	
+    }
+  }
+	&__element-container {
+		box-sizing: content-box;
 	}
 }
