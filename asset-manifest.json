@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/TravelWorld_React/static/css/main.56eff303.css",
-    "main.js": "/TravelWorld_React/static/js/main.9cbbf7d1.js",
+    "main.js": "/TravelWorld_React/static/js/main.8015155f.js",
     "static/css/750.088aa3c5.chunk.css": "/TravelWorld_React/static/css/750.088aa3c5.chunk.css",
     "static/js/750.bdfea549.chunk.js": "/TravelWorld_React/static/js/750.bdfea549.chunk.js",
     "static/css/213.88188197.chunk.css": "/TravelWorld_React/static/css/213.88188197.chunk.css",
@@ -19,7 +19,7 @@
     "static/media/travelWorld.ttf": "/TravelWorld_React/static/media/travelWorld.3a5b008b40ca9f4dd9e0.ttf",
     "index.html": "/TravelWorld_React/index.html",
     "main.56eff303.css.map": "/TravelWorld_React/static/css/main.56eff303.css.map",
-    "main.9cbbf7d1.js.map": "/TravelWorld_React/static/js/main.9cbbf7d1.js.map",
+    "main.8015155f.js.map": "/TravelWorld_React/static/js/main.8015155f.js.map",
     "750.088aa3c5.chunk.css.map": "/TravelWorld_React/static/css/750.088aa3c5.chunk.css.map",
     "750.bdfea549.chunk.js.map": "/TravelWorld_React/static/js/750.bdfea549.chunk.js.map",
     "213.88188197.chunk.css.map": "/TravelWorld_React/static/css/213.88188197.chunk.css.map",
@@ -34,6 +34,6 @@
   },
   "entrypoints": [
     "static/css/main.56eff303.css",
-    "static/js/main.9cbbf7d1.js"
+    "static/js/main.8015155f.js"
   ]
 }
