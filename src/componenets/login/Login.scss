@@ -78,7 +78,7 @@
     &__login-alternatives {
 			max-width: 300px;
 			margin: 0 auto;
-		}
+    }
 		&__buttons {
 			padding: 0;
 		}
@@ -87,6 +87,7 @@
 
 @media (max-width: $mobile) {
   .login-section {
+		padding-bottom: toRem(50);
     &__mosque {
       display: none;
     }

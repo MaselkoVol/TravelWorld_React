@@ -71,6 +71,7 @@ function Slider({
 	}
 
 	const autoScrollInterval = useRef(setInterval(() => { }, Number.MAX_SAFE_INTEGER));
+	const previousTouchRef = useRef([0, 0]);
 	const elementsAmountOnPage = useRef(0);
 	const currentElementOnScreen = useRef(0);
 	const prevPageX = useRef(0);
@@ -184,7 +185,11 @@ function Slider({
 
 
 	function dragStart(e: MouseEvent | TouchEvent, container: HTMLElement) {
-		e.preventDefault();
+		if (e instanceof TouchEvent) {
+			previousTouchRef.current = [e.changedTouches[0].clientX, e.changedTouches[0].clientY];
+		} else {
+			e.preventDefault();
+		}
 		// updatating global variables value on mouse down event
 		setIsDragStart(true);
 		if (e instanceof MouseEvent) {
@@ -198,7 +203,21 @@ function Slider({
 	function dragging(e: MouseEvent | TouchEvent, container: HTMLElement) {
 		// scrolling images/carousel to left according to mouse pointer
 		if (!isDragStartRef.current) return;
-		e.preventDefault();
+		if (e instanceof TouchEvent) {
+			let xs = previousTouchRef.current[0];
+			let xe = e.changedTouches[0].clientX;
+			let ys = previousTouchRef.current[1];
+			let ye = e.changedTouches[0].clientY;
+			console.log(Math.abs(xs - xe), Math.abs(ys - ye))
+			previousTouchRef.current[0] = e.changedTouches[0].clientX;
+			previousTouchRef.current[1] = e.changedTouches[0].clientY;
+			if (Math.abs(xs - xe) < .5 && Math.abs(ys - ye) > .8) {
+				e.preventDefault();
+				dragStop(container);
+				return;
+			}
+		}
+
 
 		setIsDraggable(true);
 		container.classList.add("dragging");
@@ -220,7 +239,7 @@ function Slider({
 		let closestElementPos = 0;
 		if (positionDiff.current < 0) {
 			// swipe to the right
-			if (pos < elements.length - elementsAmountOnPage.current && distanceDiff < 0.3) {
+			if (pos < elements.length - elementsAmountOnPage.current && distanceDiff < 0.1) {
 				closestElementPos = elemPervDistanceToStart;
 				currentElementOnScreen.current = pos - shift;
 			} else {
@@ -228,7 +247,7 @@ function Slider({
 				currentElementOnScreen.current = pos;
 			}
 		} else {
-			if (pos !== 0 && 1 / distanceDiff > 0.3) {
+			if (pos !== 0 && 1 / distanceDiff > 0.1) {
 				closestElementPos = elemPervDistanceToStart;
 				currentElementOnScreen.current = pos - shift;
 			} else {
