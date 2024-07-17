@@ -57,6 +57,7 @@
 
 @media (max-width: $mobile) {
   .footer {
+		box-shadow: 0 0 5px $greyColor;
 		&__container {
       padding: toRem(20) 0 toRem(10) 0;
     }
