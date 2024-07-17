@@ -203,13 +203,13 @@ function Slider({
 	function dragging(e: MouseEvent | TouchEvent, container: HTMLElement) {
 		// scrolling images/carousel to left according to mouse pointer
 		if (!isDragStartRef.current) return;
+		e.preventDefault();
 		if (e instanceof TouchEvent) {
 			let ys = previousTouchRef.current;
 			let ye = e.changedTouches[0].clientY;
 			previousTouchRef.current = e.changedTouches[0].clientY;
 			console.log(Math.abs(ys - ye) )
-			if (Math.abs(ys - ye) > 8) {
-				e.preventDefault();
+			if (Math.abs(ys - ye) > 10) {
 				dragStop(container);
 				return;
 			}
