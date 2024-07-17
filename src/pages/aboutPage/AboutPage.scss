@@ -1,8 +1,29 @@
 @import "../../utils/styles/common.scss";
 
 .about-page {
-	&__image {
-		height: 191px;
-		border: 1px solid black;
+  &__about {
+    padding-top: em(100);
+    padding-bottom: em(50);
+  }
+  &__service {
+    padding: em(62) 0;
+  }
+	&__subscribe {
+		margin-top: em(50);
 	}
+}
+
+@media (max-width: $mobile) {
+  .about-page {
+    &__about {
+      padding-top: em(60);
+      padding-bottom: em(30);
+    }
+    &__service {
+      padding: em(30) 0;
+    }
+		&__subscribe {
+			margin-top: em(30);
+		}
+  }
 }

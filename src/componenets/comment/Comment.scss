@@ -1,0 +1,35 @@
+@import "../../utils/styles/common.scss";
+
+.user-comment {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	gap: em(20);
+	height: 100%;
+
+	&__user {
+		display: flex;
+		gap: em(30);
+		align-items: center;
+	}
+	&__text {
+		color: $greyColor;
+		font-size: em(15);
+		white-space: wrap;
+	}
+	&__image {
+		width: em(85);
+		height: em(63);
+		border-radius: em(6);
+		overflow: hidden;
+	}
+	&__name {
+		font-weight: 500;
+		font-size: em(16);
+	}
+	&__role {
+		font-size: em(16);
+		color: $greyColor;
+		margin-top: em(5);
+	}
+}

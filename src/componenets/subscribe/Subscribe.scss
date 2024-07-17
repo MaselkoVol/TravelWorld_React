@@ -1,0 +1,64 @@
+@import "../../utils/styles/common.scss";
+
+.subscribe-section {
+	background-color: $lightBlueColor;
+  &__container {
+    position: relative;
+    padding-top: em(25);
+    padding-bottom: em(40);
+  }
+  &__title {
+    font-size: em(22);
+    font-weight: 500;
+  }
+  &__input {
+    margin-top: em(15);
+		&._scroll-animation-once {
+			box-shadow: 0 0 8px 8px $darkWhiteColor;
+			transition: box-shadow .4s ease;
+			&._animated-once {
+				box-shadow: 0 0 0 0 $darkWhiteColor;
+			}
+		}
+  }
+  &__text {
+		font-size: em(16);
+		font-weight: 400;
+		margin-top: em(15);
+	}
+	&__content {
+		max-width: em(544);
+		z-index: 1;
+		position: relative;
+	}
+}
+
+@media (min-width: $mobileSmall) {
+  .subscribe-section {
+    &__container {
+      padding-top: em(50);
+      padding-bottom: em(107);
+    }
+    &__image {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: em(546);
+    }
+		&__input {
+			margin-top: em(30);
+		}
+		&__title {
+			font-size: em(28);
+		}
+  }
+}
+
+@media (max-width: 1050px) {
+  .subscribe-section {
+    &__image {
+      opacity: 0.2;
+    }
+  }
+}

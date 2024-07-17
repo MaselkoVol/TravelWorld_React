@@ -1,35 +1,40 @@
+import React from "react";
+
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
-import HomePage from "../pages/homePage/HomePage";
-import ToursPage from "../pages/toursPage/ToursPage";
-import AboutPage from "../pages/aboutPage/AboutPage";
-import LoginPage from "../pages/loginPage/LoginPage";
-import RegisterPage from "../pages/registerPage/RegisterPage";
+import SplashScreen from "../pages/splashScreen/SplashScreen";
+import ErrorPage from "../pages/errorPage/ErrorPage";
+const LazyRegisterPage = React.lazy(() => import("../pages/registerPage/RegisterPage"));
+const LazyLoginPage = React.lazy(() => import("../pages/loginPage/LoginPage"))
+const LazyHomePage = React.lazy(() => import("../pages/homePage/HomePage"));
+const LazyAboutPage = React.lazy(() => import("../pages/aboutPage/AboutPage"));
+const LazyGalleryPage = React.lazy(() => import("../pages/galleryPage/GalleryPage"))
 
 export const router = createBrowserRouter([
 	{
 		path: "/",
 		element: <App />,
+		errorElement: <ErrorPage />,
 		children: [
 			{
 				path: "/",
-				element: <HomePage />
-			},
-			{
-				path: "/tours",
-				element: <ToursPage />
+				element: <React.Suspense fallback={<SplashScreen />}><LazyHomePage /></React.Suspense>
 			},
 			{
 				path: "/about",
-				element: <AboutPage />
+				element: <React.Suspense fallback={<SplashScreen />}><LazyAboutPage /></React.Suspense>
+			},
+			{
+				path: "/gallery",
+				element: <React.Suspense fallback={<SplashScreen />}><LazyGalleryPage /></React.Suspense>
 			},
 			{
 				path: "/login",
-				element: <LoginPage />
+				element: <React.Suspense fallback={<SplashScreen />}><LazyLoginPage /></React.Suspense>
 			},
 			{
 				path: "/register",
-				element: <RegisterPage />
+				element: <React.Suspense fallback={<SplashScreen />}><LazyRegisterPage /></React.Suspense>
 			}
 		]
 	}

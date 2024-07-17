@@ -1,0 +1,6 @@
+@import "../../../utils/styles/skeleton.scss";
+
+.skeleton-element {
+	--skeleton-color: #dddbdd;
+  @include skeletonBlock(var(--skeleton-color));
+}

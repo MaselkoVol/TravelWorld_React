@@ -1,18 +1,51 @@
+@import "../../../utils/styles/common.scss";
 .super-duper-slider {
+  position: relative;
   &__container {
     display: flex;
     overflow: hidden;
     white-space: nowrap;
     scroll-behavior: smooth;
-		position: relative;
-		flex-wrap: nowrap;
-
+    position: relative;
+    flex-wrap: nowrap;
     &.dragging {
       cursor: grab;
-      scroll-behavior: auto;	
+      scroll-behavior: auto;
     }
   }
-	&__element-container {
-		box-sizing: content-box;
-	}
+  &__element-container {
+    box-sizing: content-box;
+		border-left: em(45) solid transparent;
+  }
+  &__navigation-container {
+    justify-content: center;
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+		gap: em(10);
+		margin-top: em(30);
+  }
+  &__navigation {
+		display: block;
+    width: em(18);
+		height: em(18);
+		position: relative;
+    &.active {
+			&::after {
+				background-color: $greyColor;
+			}
+    }
+		&::after {
+			content: "";
+			position: absolute;
+			width: em(8);
+			height: em(8);
+			border-radius: 100%;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			background-color: $lightGreyColor;
+			transition: background .3s ease;
+		}
+  }
 }

@@ -1,0 +1,15 @@
+@import "../../../utils/styles/common.scss";
+
+.loader {
+  width: 20px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: $lightOrangeColor;
+  box-shadow: 0 0 0 0 $lightOrangeColor;
+  animation: l1 1s infinite;
+}
+@keyframes l1 {
+  100% {
+    box-shadow: 0 0 0 20px rgba($darkOrangeColor, 0);
+  }
+}

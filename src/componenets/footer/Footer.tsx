@@ -15,7 +15,7 @@ function Footer({ }: Props) {
 	] as const;
 
 	const authorizationLinks = [
-		{ name: "Gallery", to: "/gallery " },
+		{ name: "Gallery", to: "/gallery" },
 		{ name: "Login", to: "/login" },
 		{ name: "Register", to: "/register" },
 	] as const;
@@ -54,7 +54,7 @@ function Footer({ }: Props) {
 
 						<div className='footer__item footer__item_main'>
 							<Logo className='footer__logo' />
-							<p className='footer__text'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, enim.</p>
+							<p className='footer__text'>Discover the World with Confidence. Travel Experts at Your Service.</p>
 							<div className="footer__icons">
 								<a href='https://youtube.com' className='icon-youtube footer__media-icon'></a>
 								<a href='https://x.com' className='icon-twitter footer__media-icon'></a>

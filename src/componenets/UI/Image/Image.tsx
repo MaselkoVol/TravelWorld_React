@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "./Image.scss";
 
 
@@ -7,12 +7,19 @@ type Props = React.ImgHTMLAttributes<HTMLImageElement> & {
 	imgFit?: "cover" | "contain",
 }
 
-function Image({className, imgFit = "cover", ...imgAttributes}: Props) {
+const Image = ({ className, imgFit = "cover", src, ...imgAttributes }: Props) => {
+
 	return (
 		<div className={`image ${className ? className : ""}`}>
-			<img {...imgAttributes} className='image__content' style={{objectFit: imgFit}} />
+			< img
+				loading='lazy'
+				src={src}
+				{...imgAttributes}
+				className='image__content'
+				style={{ objectFit: imgFit }}
+			/>
 		</div>
 	)
 }
 
-export default Image
+export default Image;

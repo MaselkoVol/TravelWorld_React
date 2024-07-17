@@ -1,0 +1,25 @@
+@import "../../../utils/styles/common.scss";
+
+.submit-button {
+	background-color: $lightOrangeColor;
+	color: $darkWhiteColor;
+	font-size: em(18);
+	padding: .555em 4.555em;
+	border-radius: 5px;
+	font-weight: 600;
+}
+
+.pagination-button {
+	font-size: em(18);
+	padding: .555em 1.111em;
+	border-radius: 6px;
+	font-weight: 600;
+	border: 1px solid $darkGreenColor;
+	transition: background .3s ease, color .3s ease;
+	@media(any-hover: hover) {
+		&:hover {
+			background-color: $darkGreenColor;
+			color: $darkWhiteColor;
+		}
+	}
+}

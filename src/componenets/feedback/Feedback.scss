@@ -1,0 +1,28 @@
+@import "../../utils/styles/common.scss";
+
+.feedback-section {
+	&__slider-element {
+		border-left: em(45) solid transparent;
+	}
+	&__slider {
+		margin-top: em(33);
+		&_skeleton {
+			width: 100%;
+			height: 195px;
+		}
+	}
+	&__comment {
+		max-width: em(400);
+	}
+	
+}
+
+@media (max-width: $mobile) {
+	.feedback-section {
+		&__comment {
+			max-width: em(400);
+			margin: 0 auto;
+		}
+	}
+	
+}

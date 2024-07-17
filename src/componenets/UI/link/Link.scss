@@ -1,0 +1,19 @@
+@import "../../../utils/styles/common.scss";
+
+.submit-link {
+	display: block;
+	background-color: $lightOrangeColor;
+	color: $darkWhiteColor;
+	font-size: em(18);
+	padding: .555em 4.555em;
+	border-radius: 5px;
+	font-weight: 600;
+	text-align: center;
+}
+
+.link-icon {
+	display: block;
+	padding: em(9) em(24);
+	border-radius: em(9);
+	border: 1px solid $lightOrangeColor;
+}

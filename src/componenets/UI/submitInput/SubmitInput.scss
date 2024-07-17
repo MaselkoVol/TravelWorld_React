@@ -1,0 +1,36 @@
+@import "../../../utils/styles/common.scss";
+
+.submit-input {
+	background-color: $darkWhiteColor;
+	padding: em(6) em(10);
+	display: flex;
+	align-items: center;
+	border-radius: em(5);
+	row-gap: em(10);
+	column-gap: em(15);
+	&__input {
+		width: 100%;
+		padding: em(5) 0;
+		color: $greyColor;
+		font-weight: 400;
+		font-size: em(16);
+		outline: none;
+		border: none;
+		flex: 1;
+	}
+	&__submit {
+		flex: 0;
+		background-color: $lightOrangeColor;
+		padding: em(11) em(16);
+		color: $darkWhiteColor;
+		border-radius: em(6);
+		font-weight: 500;
+		font-size: em(16);
+		transition: background .3s ease;
+		@media (any-hover: hover) {
+			&:hover {
+				background-color: $lightRedColor;
+			}
+		}
+	}
+}

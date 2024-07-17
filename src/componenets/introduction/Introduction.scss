@@ -21,6 +21,7 @@
     width: em(166);
     height: em(350);
     border-radius: em(20);
+		overflow: hidden;
     border: 2px solid $lightOrangeColor;
     opacity: 0;
     transform: translateX(100%);
@@ -37,6 +38,9 @@
       z-index: 3;
       transition-delay: 0.1s;
     }
+		&.isLoading {
+			border: 2px solid transparent;
+		}
   }
 
   &__sub-title {
@@ -101,7 +105,7 @@
       flex-direction: column-reverse;
     }
     &__images {
-      max-width: 90%;
+      max-width: 95%;
       margin: 0 auto;
       &._animated-once .introduction-section__image {
         transform: translate(0) rotate(-5deg);

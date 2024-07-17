@@ -3,24 +3,25 @@ import "./Service.scss";
 import TextCard from '../UI/textCard/TextCard';
 type Props = {
 	className?: string,
+	isAnimated?: boolean
 }
 
-function Service({ className }: Props) {
+function Service({ className, isAnimated = true }: Props) {
 
 	const textCards = [
 		{
 			icon: "icon-weather",
 			title: "Calculate Weather",
-			text: "Lorem ipsum dolor sit amet, adipisicing elit.",
+			text: "Check weather forecasts quickly.",
 		},
 		{
 			icon: "icon-guide",
 			title: "Best Tour Guide",
-			text: "Lorem ipsum dolor sit amet, adipisicing elit.",
+			text: "Explore with expert guides.",
 		}, {
 			icon: "icon-customization",
 			title: "Customization",
-			text: "Lorem ipsum dolor sit amet, adipisicing elit.",
+			text: "Personalize your travel experience.",
 		}
 	] as const;
 
@@ -32,7 +33,7 @@ function Service({ className }: Props) {
 					<h2 className='service-section__title'>We offer out best services</h2>
 				</div>
 
-				<div className='service-section__content _scroll-animation-once'>
+				<div className={`service-section__content ${isAnimated ? "_scroll-animation-once" : ""}`}>
 					{textCards.map((card, idx) => (
 						<TextCard className={`service-section__text-card service-section__text-card_${idx}`} key={idx} title={card.title} text={card.text} iconClass={card.icon} />
 					))}

@@ -1,0 +1,23 @@
+@import "../../utils/styles/common.scss";
+
+.our-gallery {
+  &__title {
+    text-align: center;
+    font-weight: 600;
+		@include adaptiveValue(font-size, 44, 28);
+		@include adaptiveValue(margin-bottom, 50, 15);
+  }
+  &__item-gap {
+    @include adaptiveValue(margin-top, 30, 5, 0, $maxWidthContainer, $minWidth);
+  }
+	&__button {
+		@include adaptiveValue(margin-top, 50, 20);
+		margin: 0 auto;
+		display: block;
+	}
+	&__loader {
+		display: block;
+		margin: 12px auto;
+		@include adaptiveValue(margin-top, 62, 32);
+	}
+}

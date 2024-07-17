@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { HeaderType } from '../../utils/types'
 import "./Header.scss";
 import Logo from '../UI/logo/Logo';
-import useScrollAnimationOnce from '../../hooks/useScrollAnimationOnce';
+import useScrollAnimationOnce from '../../context/scrollAnimationOnce/useScrollAnimationOnce';
 
 type Props = {
 	type: HeaderType,
@@ -11,13 +11,17 @@ type Props = {
 
 
 function Header({ type = "all" }: Props) {
+	useScrollAnimationOnce();
 
 	const headerContainer = useRef<HTMLDivElement>(null);
-	useScrollAnimationOnce();
+
+	const handleLinkClick = function () {
+		document.documentElement.scrollTop = 0;
+		handleIconClick();
+	}
 
 	const handleIconClick = function () {
 		if (headerContainer.current === null) return;
-
 		const container = headerContainer.current;
 		if (container.classList.contains("_active")) {
 			container.classList.remove("_active");
@@ -30,7 +34,7 @@ function Header({ type = "all" }: Props) {
 	const pageLinks = [
 		{ name: "Home", to: "/" },
 		{ name: "About", to: "/about" },
-		{ name: "Tours", to: "/tours" },
+		{ name: "Gallery", to: "/gallery" },
 	] as const;
 
 	const authorizationLinks = [
@@ -48,13 +52,13 @@ function Header({ type = "all" }: Props) {
 						<div className="header__menu-back"></div>
 						<ul className={`header__list header__list_pages ${type}`}>
 							{pageLinks.map((link, idx) => (
-								<li key={idx}><NavLink to={link.to} className={({ isActive }) => `header__link ${isActive ? "isActive" : ""}`}>{link.name}</NavLink></li>
+								<li key={idx}><NavLink onClick={handleLinkClick} to={link.to} className={({ isActive }) => `header__link ${isActive ? "isActive" : ""}`}>{link.name}</NavLink></li>
 							))}
 
 						</ul>
 						<ul className={`header__list header__list_authorization ${type}`}>
 							{authorizationLinks.map((link, idx) => (
-								<li key={idx}><NavLink to={link.to} className={({ isActive }) => `header__link ${isActive ? "isActive" : ""}`}>{link.name}</NavLink></li>
+								<li key={idx}><NavLink onClick={handleLinkClick} to={link.to} className={({ isActive }) => `header__link ${isActive ? "isActive" : ""}`}>{link.name}</NavLink></li>
 							))}
 						</ul>
 					</nav>

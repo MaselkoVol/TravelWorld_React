@@ -57,8 +57,9 @@
 
 @media (max-width: $mobile) {
   .footer {
-		&__logo {
-		}
+		&__container {
+      padding: toRem(20) 0 toRem(10) 0;
+    }
 		&__text {
 			margin-top: em(10);
 			max-width: toRem(400);
@@ -83,6 +84,9 @@
 
 @media (min-width: $mobile) and (max-width: toRem(960)) {
   .footer {
+		&__container {
+      padding: toRem(30) 0 toRem(20) 0;
+    }
 		&__lists {
 			display: flex;
       gap: em(20);

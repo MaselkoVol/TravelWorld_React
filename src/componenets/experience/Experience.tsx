@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import "./Experience.scss";
 import MetricIcon from '../UI/metricIcon/MetricIcon';
 import Image from '../UI/Image/Image';
+import SectionHeader from '../UI/sectionHeader/SectionHeader';
 type Props = {
 	className?: string
 }
@@ -11,9 +12,8 @@ function Experience({ className }: Props) {
 	return (
 		<div className='container'>
 			<div className={`experience-section ${className ? className : ""}`}>
-				<h3 className='_filled-text-orange experience-section__sub-title'>Experience</h3>
-				<h2 className='experience-section__title'>With our all experience will serve you</h2>
-				<p className='experience-section__text'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas aliquam, hic tempora inventore suscipit unde.</p>
+				<SectionHeader title='Experience' text="With our all experience will serve you" />
+				<p className='experience-section__text'>We have organized numerous trips, satisfied countless clients, and accumulated years of expertise to ensure your travels are unforgettable.</p>
 
 				<div className='experience-section__metrics _scroll-animation-once'>
 					<MetricIcon title='12k+' text="Successful trip" className='experience-section__metric experience-section__metric_1' />

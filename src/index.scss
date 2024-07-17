@@ -13,6 +13,13 @@ a {
 	color: $darkGreenColor;
 }
 
+button, input[type="submit"], input[type="reset"] {
+	background: none;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	outline: inherit;
+}
 /* Выставляем основные настройки по-умолчанию для body */
 body {
   min-height: 100vh;
@@ -40,13 +47,6 @@ img {
   display: block;
 }
 
-/* Наследуем шрифты для инпутов и кнопок */
-input,
-button,
-textarea,
-select {
-  font: inherit;
-}
 
 /* Удаляем все анимации и переходы для людей, которые предпочитай их не использовать */
 @media (prefers-reduced-motion: reduce) {

@@ -15,7 +15,8 @@
 
 @media (max-width: $mobile) {
   .section-header {
-    flex-direction: row;
-		align-items: center;
+		&__text {
+			font-size: em(24);
+		}
   }
 }

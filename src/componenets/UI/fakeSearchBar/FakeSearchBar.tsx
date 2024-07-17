@@ -1,10 +1,12 @@
 import React from 'react'
 import "./FakeSearchBar.scss";
-type Props = {}
+type Props = {
+	className?: string,
+}
 
-function FakeSearchBar({ }: Props) {
+function FakeSearchBar({ className }: Props) {
 	return (
-		<div className='fake-searchbar'>
+		<div className={`fake-searchbar ${className ? className : ""}`}>
 			<div className="fake-searchbar__container">
 
 				<div className='fake-searchbar__item-container'>
@@ -30,7 +32,7 @@ function FakeSearchBar({ }: Props) {
 						<p className='fake-searchbar__text'>0</p>
 					</div>
 				</div>
-				
+
 				<div className='fake-searchbar__search'>
 					<i className='icon-search fake-searchbar__search-icon'></i>
 				</div>

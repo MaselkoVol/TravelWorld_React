@@ -1,0 +1,26 @@
+@import "../../../utils/styles/common.scss";
+
+.crossed-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+	
+	&__text {
+		background-color: $darkWhiteColor;
+		padding: 0 5px;
+	}
+
+  &::before {
+    z-index: -1;
+    content: "";
+    position: absolute;
+    display: block;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 1px;
+    background-color: $lightOrangeColor;
+  }
+}

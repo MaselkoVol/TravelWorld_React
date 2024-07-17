@@ -1,0 +1,12 @@
+@import "../../../utils/styles/common.scss";
+
+.input {
+	padding: em(15) em(30);
+	border-radius: 8px;
+	border: 1px solid $lightOrangeColor;
+	color: $greyColor;
+	font-size: toRem(16);
+	&:focus {
+		outline: 1px solid $darkOrangeColor;
+	}
+}

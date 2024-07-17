@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './App.scss';
-import { Outlet, useLocation, useNavigation, useOutletContext } from 'react-router';
+import { Outlet, useOutletContext } from 'react-router';
 import "./utils/styles/icons.scss";
 import Header from './componenets/header/Header';
 import Footer from './componenets/footer/Footer';
@@ -11,7 +11,10 @@ import { addBodyClassIfMobile } from './utils/functions';
 function App() {
 	const [headerType, setHeaderType] = useState<HeaderType>("all");
 
-	useEffect(()=> {
+	useEffect(() => {
+		document.addEventListener("load", () => {
+			console.log("document is ready");
+		})
 		addBodyClassIfMobile();
 	}, [])
 
@@ -20,7 +23,7 @@ function App() {
 			<div className='wrapper'>
 				<Header type={headerType} />
 				<main>
-					<Outlet context={setHeaderType}/>
+					<Outlet context={setHeaderType} />
 				</main>
 				<Footer />
 			</div>
@@ -28,7 +31,7 @@ function App() {
 	);
 }
 
-export function useHeaderType () {
+export function useHeaderType() {
 	return useOutletContext<React.Dispatch<React.SetStateAction<HeaderType>>>();
 }
 

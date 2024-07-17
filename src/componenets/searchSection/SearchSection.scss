@@ -1,0 +1,16 @@
+@import "../../utils/styles/common.scss";
+
+
+	.search-section {
+		&__container {
+			display: flex;
+			align-items: center;
+		}
+		&__search {
+			flex-shrink: 0;
+		}
+		&__image {
+			position: relative;
+			left: 30px;
+		}
+	}

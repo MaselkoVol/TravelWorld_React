@@ -1,0 +1,160 @@
+@import "../../utils/styles/common.scss";
+.register-section {
+  &__header {
+    position: relative;
+  }
+  &__plane {
+    position: absolute;
+    right: -170px;
+    top: -30px;
+    width: 352px;
+    height: 111px;
+  }
+  &__title {
+    margin-top: toRem(30);
+    font-weight: 600;
+    color: $lightOrangeColor;
+    text-align: center;
+    line-height: toRem(48);
+  }
+  &__sub-title {
+    font-size: 12px;
+    font-weight: 500;
+    color: $greyColor;
+    text-align: center;
+  }
+  &__input {
+    margin-top: toRem(20);
+    width: 100%;
+  }
+	&__personal-info {
+		margin-top: 25px;
+		display: flex;
+		gap: 32px;
+		& > .register-section__input {
+			margin-top: 0;
+		}
+	}
+  &__forgot-password {
+    margin-top: toRem(10);
+    text-align: right;
+    display: block;
+    font-weight: 500;
+  }
+  &__buttons {
+    margin-top: toRem(25);
+    padding: 0 toRem(64);
+  }
+  &__splitter {
+    margin-top: toRem(15);
+		margin-bottom: toRem(10);
+  }
+  &__splitter-text {
+    color: $lightOrangeColor;
+    font-weight: 600;
+  }
+  &__register-alternatives {
+    display: flex;
+    justify-content: center;
+    gap: toRem(15);
+  }
+  &__icon {
+    & > i {
+      font-size: toRem(15);
+    }
+  }
+  &__login {
+		text-align: center;
+    margin-top: toRem(15);
+    color: $greyColor;
+    font-size: toRem(13);
+    white-space: nowrap;
+    font-weight: 500;
+    & > span {
+      color: $lightOrangeColor;
+      font-weight: 600;
+    }
+  }
+}
+
+@media (max-width: $mobileSmall) {
+  .register-section {
+		&__mosque {
+      display: none;
+    }
+    &__towers {
+      display: none;
+    }
+		&__buttons {
+			padding: 0;
+		}
+		&__personal-info {
+			flex-direction: column;
+			gap: em(20);
+		}
+		&__title {
+			font-size: toRem(24);
+		}
+		&__sub-title {
+			max-width: 300px;
+			margin: 0 auto;
+		}
+		&__register-alternatives {
+			max-width: 300px;
+			margin: 0 auto;
+		}
+  }
+}
+
+@media (max-width: $mobile) and (min-width: $mobileSmall) {
+  .register-section {
+    &__mosque {
+      display: none;
+    }
+    &__towers {
+      display: none;
+    }
+    &__content {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+		&__title {
+			font-size: em(32);
+		}
+  }
+}
+
+@media (min-width: $mobile) {
+  .register-section {
+    display: flex;
+		&__title {
+			font-size: toRem(32);
+			white-space: nowrap;
+		}
+
+    &__mosque {
+      position: absolute;
+      left: -15px;
+      bottom: 0;
+      z-index: -1;
+    }
+    &__towers {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+    }
+    &__content {
+      position: relative;
+      max-width: 544px;	
+      padding: 0 33px;
+    }
+    &__image,
+    &__skeleton {
+      flex: 1 1 auto;
+      border-radius: 12px 0 0 12px;
+      overflow: hidden;
+      height: 662px;
+    }
+  }
+}

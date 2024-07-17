@@ -1,11 +1,19 @@
 import React, { useRef, useEffect, useState, useReducer } from 'react'
 import "./Slider.scss";
+import { useReactiveVariable } from '../../../hooks/useReactiveVariable';
 
 type BaseProps = {
 	elements: React.ReactElement[],
 	gap?: number,
 	className?: string,
 	buttonClass?: string | "no-buttons",
+	swipeByChunks?: boolean,
+	overscroll?: number,
+	containerClass?: string,
+	navigationContainerClass?: string,
+	navigationClass?: string,
+	elementClass?: string,
+	autoScrollingByTime?: [number, number]
 };
 
 // you can select constant amount of elements or you can pass minimum width of every element so slider will be adaptive.
@@ -16,30 +24,43 @@ type Props =
 	| BaseProps & { amount: number; elemMinWidth?: number }
 	| BaseProps & { amount?: number; elemMinWidth: number };
 
-function Slider({ elements, className, gap = 0, elemMinWidth, amount }: Props) {
+function Slider({
+	overscroll = 10,
+	elements,
+	className,
+	gap = 0,
+	elemMinWidth,
+	amount,
+	swipeByChunks = false,
+	containerClass,
+	navigationContainerClass,
+	navigationClass,
+	elementClass,
+	autoScrollingByTime,
+}: Props) {
+	const [navigationElements, setNavigationElements] = useState<React.ReactElement[]>([]);
 	const [isComponentReady, setIsComponentReady] = useState(false);
+	const [canAutoScrollByTime, setCanAutoScrollByTime] = useState(true);
 
-	const [elementsWidth, setElementsWidth] = useState(0);
-	const elementsWidthRef = useRef(elementsWidth);
-	const setElementsWidthRef = (value: number) => {
-		setElementsWidth(value);
-		elementsWidthRef.current = value;
-	}
+	const [isDragStart, isDragStartRef, setIsDragStart] = useReactiveVariable(false);
+	const [isDraggable, isDraggableRef, setIsDraggable] = useReactiveVariable(false);
+	const [elementsWidth, elementsWidthRef, setElementsWidth] = useReactiveVariable(0);
 
 	function getElemStyles(idx: number) {
 		const basicElemStyles = {
 			minWidth: elementsWidth + "px",
+			borderRight: idx == elements.length - 1 ? `${overscroll}px solid transparent` : "none",
 		}
 		let fullElemStyles = null;
 		if (gap) {
 			fullElemStyles = {
 				...basicElemStyles,
-				borderLeft: `${(idx == 0) ? 0 : gap}px solid transparent`,
+				borderLeft: `${(idx == 0) ? overscroll : gap}px solid transparent`,
 			}
 		} else if (idx == 0) {
 			fullElemStyles = {
 				...basicElemStyles,
-				borderLeft: "none",
+				borderLeft: `${overscroll}px solid transparent`,
 			}
 		} else {
 			fullElemStyles = {
@@ -49,24 +70,71 @@ function Slider({ elements, className, gap = 0, elemMinWidth, amount }: Props) {
 		return fullElemStyles;
 	}
 
+	const autoScrollInterval = useRef(setInterval(() => { }, Number.MAX_SAFE_INTEGER));
 	const elementsAmountOnPage = useRef(0);
 	const currentElementOnScreen = useRef(0);
-	const isDragStart = useRef(false);
-	const isDraggable = useRef(false);
 	const prevPageX = useRef(0);
 	const prevScrollLeft = useRef(0);
 	const positionDiff = useRef(0);
 
 	const sliderRef = useRef<HTMLDivElement>(null);
 	const containerRef = useRef<HTMLDivElement>(null);
+	const navContainerRef = useRef<HTMLDivElement>(null);
 
-	function scrollImmediatelyToCurrentPage(container: HTMLElement) {
+
+
+	function convertCurElementToNavElement(currentElement: number, byChunks: boolean) {
+		if (byChunks) {
+			currentElement = Math.floor(currentElement / elementsAmountOnPage.current);
+		}
+		return currentElement;
+	}
+
+	function scrollImmediatelyToCurrentPage(container: HTMLElement, byChunks: boolean) {
 		container.classList.add("dragging");
 		setTimeout(() => {
 			const currentElement = container.children[currentElementOnScreen.current] as HTMLElement;
 			container.scrollLeft = currentElement.offsetLeft + currentElement.clientLeft;
 			setTimeout(() => { container.classList.remove("dragging") }, 0);
 		}, 0);
+		createNavigation(container, byChunks);
+	}
+
+	function navigationScrollToPage(container: HTMLElement, idx: number, byChunks: boolean) {
+		if (byChunks) {
+			idx = Math.floor(idx * elementsAmountOnPage.current);
+		}
+		const currentElement = container.children[idx] as HTMLElement;
+		container.scrollLeft = currentElement.offsetLeft + currentElement.clientLeft;
+		currentElementOnScreen.current = idx;
+		createNavigation(container, byChunks);
+	}
+
+	function calcAmountOfNavigation(byChunks: boolean) {
+		let amoutOfNavigation = 0;
+		if (byChunks) {
+			amoutOfNavigation = Math.ceil(elements.length / elementsAmountOnPage.current);
+		} else {
+			amoutOfNavigation = elements.length - elementsAmountOnPage.current + 1;
+		}
+		return amoutOfNavigation
+	}
+
+	function createNavigation(container: HTMLElement, byChunks: boolean) {
+		const currentElement = convertCurElementToNavElement(currentElementOnScreen.current, byChunks);
+
+		const amountOfNavigation = calcAmountOfNavigation(byChunks);
+		const elems = [];
+		for (let i = 0; i < amountOfNavigation; i++) {
+			elems.push(
+				<span
+					key={i}
+					onClick={() => navigationScrollToPage(container, i, byChunks)}
+					className={`super-duper-slider__navigation = ${i == currentElement ? "active" : ""} ${navigationClass ? navigationClass : ""}`}
+				></span>
+			);
+		}
+		setNavigationElements(elems);
 	}
 
 	function resizeElementsWith(container: HTMLElement) {
@@ -74,26 +142,30 @@ function Slider({ elements, className, gap = 0, elemMinWidth, amount }: Props) {
 		const myGap = lastChild.clientLeft;
 
 		if (elemMinWidth) {
-			let amountWhichFit = Math.floor((container.offsetWidth + myGap) / (elemMinWidth + myGap));
+			let amountWhichFit = Math.floor((container.clientWidth + myGap) / (elemMinWidth + myGap));
 			// it means only one image can be on page
-			if (container.offsetWidth <= elemMinWidth) {
+			if (container.clientWidth <= elemMinWidth) {
 				amountWhichFit = 1;
 			}
-			let newWidth = (container.offsetWidth - myGap * (amountWhichFit - 1)) / amountWhichFit;
+			let newWidth = (container.clientWidth - myGap * (amountWhichFit - 1)) / amountWhichFit;
 
-			elementsAmountOnPage.current = amountWhichFit;
+			if (elementsAmountOnPage.current !== amountWhichFit) {
+				elementsAmountOnPage.current = amountWhichFit;
+			}
+
 			if (window.innerWidth < newWidth) {
-				setElementsWidthRef(container.clientWidth);
+				setElementsWidth(container.clientWidth);
 			} else {
-				setElementsWidthRef(newWidth);
+				setElementsWidth(newWidth);
 			}
 		}
 
 		if (amount) {
-			setElementsWidthRef((container.offsetWidth - myGap * (amount - 1)) / amount);
+			setElementsWidth((container.clientWidth - myGap * (amount - 1)) / amount);
 		}
 
-		scrollImmediatelyToCurrentPage(container);
+		scrollImmediatelyToCurrentPage(container, swipeByChunks);
+		createNavigation(container, swipeByChunks);
 	}
 
 	function defineElementsWidth(container: HTMLElement) {
@@ -114,7 +186,7 @@ function Slider({ elements, className, gap = 0, elemMinWidth, amount }: Props) {
 	function dragStart(e: MouseEvent | TouchEvent, container: HTMLElement) {
 		e.preventDefault();
 		// updatating global variables value on mouse down event
-		isDragStart.current = true;
+		setIsDragStart(true);
 		if (e instanceof MouseEvent) {
 			prevPageX.current = e.pageX;
 		} else {
@@ -125,10 +197,10 @@ function Slider({ elements, className, gap = 0, elemMinWidth, amount }: Props) {
 
 	function dragging(e: MouseEvent | TouchEvent, container: HTMLElement) {
 		// scrolling images/carousel to left according to mouse pointer
-		if (!isDragStart.current) return;
+		if (!isDragStartRef.current) return;
 		e.preventDefault();
-		
-		isDraggable.current = true;
+
+		setIsDraggable(true);
 		container.classList.add("dragging");
 		positionDiff.current = 0;
 		if (e instanceof MouseEvent) {
@@ -144,11 +216,11 @@ function Slider({ elements, className, gap = 0, elemMinWidth, amount }: Props) {
 		if (pos !== 0) {
 			distanceDiff = (container.scrollLeft - elemPervDistanceToStart) / (elemDistanceToStart - container.scrollLeft);
 		}
-		
+
 		let closestElementPos = 0;
 		if (positionDiff.current < 0) {
 			// swipe to the right
-			if (pos !== 0 && distanceDiff < 0.3) {
+			if (pos < elements.length - elementsAmountOnPage.current && distanceDiff < 0.3) {
 				closestElementPos = elemPervDistanceToStart;
 				currentElementOnScreen.current = pos - shift;
 			} else {
@@ -178,7 +250,7 @@ function Slider({ elements, className, gap = 0, elemMinWidth, amount }: Props) {
 			if (i !== 0) {
 				elemPervDistanceToStart = elementsHTML[i - shift].offsetLeft + elementsHTML[i - shift].clientLeft;
 			}
-			if (elemDistanceToStart < container.scrollLeft && i !== elementsHTML.length - shift) {
+			if (elemDistanceToStart < container.scrollLeft && i < elementsHTML.length - elementsAmountOnPage.current) {
 				continue;
 			}
 			closestElementPos = chooseClosestElement(container, elemDistanceToStart, elemPervDistanceToStart, i, shift);
@@ -190,17 +262,50 @@ function Slider({ elements, className, gap = 0, elemMinWidth, amount }: Props) {
 	}
 
 	function autoSlide(container: HTMLElement) {
-		let closestElementPos = findClosestElement(container, false);
+		let closestElementPos = findClosestElement(container, swipeByChunks);
 		container.scrollLeft = closestElementPos;
 	};
 
 	const dragStop = (container: HTMLElement) => {
-		isDragStart.current = false;
+		setIsDragStart(false);
 		container.classList.remove("dragging");
-		if (!isDraggable.current) return;
-		isDraggable.current = false;
+		if (!isDraggableRef.current) return;
+		setIsDraggable(false);
 		autoSlide(container);
+		createNavigation(container, swipeByChunks);
 	};
+
+
+	const intervalFunction = (container: HTMLElement, byChunks: boolean) => {
+		let currentElement = convertCurElementToNavElement(currentElementOnScreen.current, byChunks);
+
+		const amountOfNavigation = calcAmountOfNavigation(byChunks);
+		if (currentElement >= amountOfNavigation - 1) {
+			currentElement = -1;
+		}
+		navigationScrollToPage(container, currentElement + 1, byChunks)
+	}
+
+	const autoScrollByTime = (container: HTMLElement, byChunks: boolean, time: [number, number]) => {
+
+		if (isDragStartRef.current || isDraggableRef.current) {
+			if (autoScrollInterval.current) {
+				clearInterval(autoScrollInterval.current);
+			}
+			setCanAutoScrollByTime(false);
+			setTimeout(() => setCanAutoScrollByTime(true), time[1]);
+		} else if (canAutoScrollByTime) {
+			autoScrollInterval.current = setInterval(() => intervalFunction(container, byChunks), time[0]);
+		}
+	}
+
+	useEffect(() => {
+		if (autoScrollingByTime) {
+			const container = containerRef.current;
+			if (!container) return;
+			autoScrollByTime(container, swipeByChunks, autoScrollingByTime);
+		}
+	}, (autoScrollingByTime ? [canAutoScrollByTime, isDragStart, isDraggable, elements] : [elements]))
 
 
 	useEffect(() => {
@@ -220,6 +325,9 @@ function Slider({ elements, className, gap = 0, elemMinWidth, amount }: Props) {
 		document.addEventListener("mouseup", dragStopArgs);
 		container.addEventListener("touchend", dragStopArgs);
 
+		// set initial width of elements and navigation
+		resizeElementsWith(container);
+
 		setTimeout(() => setIsComponentReady(true), 5);
 
 		return () => {
@@ -234,17 +342,21 @@ function Slider({ elements, className, gap = 0, elemMinWidth, amount }: Props) {
 			document.removeEventListener("mouseup", dragStopArgs);
 			container.removeEventListener("touchend", dragStopArgs);
 		};
-	}, []);
+	}, [elements]);
 
 	return (
 		<div ref={sliderRef} className={`super-duper-slider ${className ? className : ""}`}>
-			<div ref={containerRef} className='super-duper-slider__container'>
+			<div ref={containerRef} className={`super-duper-slider__container ${containerClass ? containerClass : ""}`}>
 				{elements.map((elem, idx) => (
-					<div key={idx} className='super-duper-slider__element-container'
+					<div key={idx} className={`super-duper-slider__element-container ${elementClass ? elementClass : ""}`}
 						style={getElemStyles(idx)} >
 						{isComponentReady ? elem : <div></div>}
 					</div>
 				))}
+			</div>
+
+			<div ref={navContainerRef} className={`super-duper-slider__navigation-container ${navigationContainerClass ? navigationContainerClass : ""}`}>
+				{navigationElements}
 			</div>
 		</div >
 	)
