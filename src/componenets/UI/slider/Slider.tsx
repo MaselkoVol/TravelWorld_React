@@ -212,7 +212,7 @@ function Slider({
 			previousTouchRef.current[0] = xe;
 			previousTouchRef.current[1] = ye;
 			console.log(Math.abs(xs - xe), Math.abs(ys - ye))
-			if (Math.abs(xs - xe) < 5 && Math.abs(ys - ye) > 10) {
+			if (Math.abs(xs - xe) < 8 && Math.abs(ys - ye) > 8) {
 				dragStop(container);
 				return;
 			}
