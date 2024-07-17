@@ -207,7 +207,8 @@ function Slider({
 			let ys = previousTouchRef.current;
 			let ye = e.changedTouches[0].clientY;
 			previousTouchRef.current = e.changedTouches[0].clientY;
-			if (Math.abs(ys - ye) > 6) {
+			console.log(Math.abs(ys - ye) )
+			if (Math.abs(ys - ye) > 8) {
 				e.preventDefault();
 				dragStop(container);
 				return;
