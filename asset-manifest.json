@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/TravelWorld_React/static/css/main.56eff303.css",
-    "main.js": "/TravelWorld_React/static/js/main.025c6621.js",
+    "main.css": "/TravelWorld_React/static/css/main.d8eda1f1.css",
+    "main.js": "/TravelWorld_React/static/js/main.12d63803.js",
     "static/css/750.b4444b4c.chunk.css": "/TravelWorld_React/static/css/750.b4444b4c.chunk.css",
     "static/js/750.bdfea549.chunk.js": "/TravelWorld_React/static/js/750.bdfea549.chunk.js",
-    "static/css/213.98d0e217.chunk.css": "/TravelWorld_React/static/css/213.98d0e217.chunk.css",
+    "static/css/213.f1784d8a.chunk.css": "/TravelWorld_React/static/css/213.f1784d8a.chunk.css",
     "static/js/213.a35931cd.chunk.js": "/TravelWorld_React/static/js/213.a35931cd.chunk.js",
     "static/css/579.fc2d5762.chunk.css": "/TravelWorld_React/static/css/579.fc2d5762.chunk.css",
     "static/js/579.0789476f.chunk.js": "/TravelWorld_React/static/js/579.0789476f.chunk.js",
@@ -18,11 +18,11 @@
     "static/media/logo.png": "/TravelWorld_React/static/media/logo.c0055d8192d1ba71b49b.png",
     "static/media/travelWorld.ttf": "/TravelWorld_React/static/media/travelWorld.3a5b008b40ca9f4dd9e0.ttf",
     "index.html": "/TravelWorld_React/index.html",
-    "main.56eff303.css.map": "/TravelWorld_React/static/css/main.56eff303.css.map",
-    "main.025c6621.js.map": "/TravelWorld_React/static/js/main.025c6621.js.map",
+    "main.d8eda1f1.css.map": "/TravelWorld_React/static/css/main.d8eda1f1.css.map",
+    "main.12d63803.js.map": "/TravelWorld_React/static/js/main.12d63803.js.map",
     "750.b4444b4c.chunk.css.map": "/TravelWorld_React/static/css/750.b4444b4c.chunk.css.map",
     "750.bdfea549.chunk.js.map": "/TravelWorld_React/static/js/750.bdfea549.chunk.js.map",
-    "213.98d0e217.chunk.css.map": "/TravelWorld_React/static/css/213.98d0e217.chunk.css.map",
+    "213.f1784d8a.chunk.css.map": "/TravelWorld_React/static/css/213.f1784d8a.chunk.css.map",
     "213.a35931cd.chunk.js.map": "/TravelWorld_React/static/js/213.a35931cd.chunk.js.map",
     "579.fc2d5762.chunk.css.map": "/TravelWorld_React/static/css/579.fc2d5762.chunk.css.map",
     "579.0789476f.chunk.js.map": "/TravelWorld_React/static/js/579.0789476f.chunk.js.map",
@@ -33,7 +33,7 @@
     "608.b6f7cfcf.chunk.js.map": "/TravelWorld_React/static/js/608.b6f7cfcf.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.56eff303.css",
-    "static/js/main.025c6621.js"
+    "static/css/main.d8eda1f1.css",
+    "static/js/main.12d63803.js"
   ]
 }
