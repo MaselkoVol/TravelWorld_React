@@ -4,18 +4,17 @@ type SizeType = "large" | "medium" | "small";
 type PhotosParams = {
   query: string;
   amount: number;
-	page?: number,
+  page?: number;
   orientation?: OrientationType;
   size?: SizeType;
   color?: string;
 };
 
-
 export class PhotoAPI {
   static async fetchPhotos({
     query,
     amount,
-		page,
+    page,
     size,
     orientation,
     color,
@@ -31,8 +30,9 @@ export class PhotoAPI {
       {
         method: "GET",
         headers: {
-          Authorization:
-            "NbdqIOBp8joqQ7sN65U05Ffnj64ucXNhNxKBFAv0RMub83isPhIK0i6k",
+          Authorization: process.env.REACT_APP_API_KEY
+            ? process.env.REACT_APP_API_KEY
+            : "",
         },
       }
     );
